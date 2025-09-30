@@ -13,7 +13,7 @@ try {
 console.log("Fetching gold prices from Gemini...");
 
 ```
-// ✅ Use the free/faster model
+// ✅ Free / fast model
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const prompt = `What are the current 22 carat and 24 carat gold prices per gram in India today in INR? 
@@ -33,29 +33,21 @@ const text = response.text();
 
 console.log("Gemini response:", text);
 
-// Extract JSON from response
 const jsonMatch = text.match(/\{[\s\S]*?\}/);
-if (!jsonMatch) {
-  throw new Error("Could not parse JSON from Gemini response");
-}
+if (!jsonMatch) throw new Error("Could not parse JSON from Gemini response");
 
 const prices = JSON.parse(jsonMatch[0]);
-
-// Path to JSON file
 const pricesPath = path.join(__dirname, "../public/gold-prices.json");
 
-// Default structure
 let previousPrices = {
   gold22k: { current: prices.gold22k },
   gold24k: { current: prices.gold24k },
 };
 
-// Read previous file if exists
 if (fs.existsSync(pricesPath)) {
   previousPrices = JSON.parse(fs.readFileSync(pricesPath, "utf8"));
 }
 
-// Calculate changes
 const gold22kChange = prices.gold22k - previousPrices.gold22k.current;
 const gold24kChange = prices.gold24k - previousPrices.gold24k.current;
 
@@ -79,17 +71,15 @@ const newData = {
   },
 };
 
-// Write to file
 fs.writeFileSync(pricesPath, JSON.stringify(newData, null, 2));
 console.log("✅ Gold prices updated successfully!");
-console.log(newData);
 ```
 
 } catch (error) {
 console.error("⚠️ Error fetching gold prices:", error);
 
 ```
-// Write a fallback so build continues
+// Write fallback and exit gracefully
 const pricesPath = path.join(__dirname, "../public/gold-prices.json");
 const fallbackData = {
   lastUpdated: new Date().toISOString(),
@@ -103,4 +93,7 @@ console.log("👉 Wrote fallback gold-prices.json so build can continue.");
 }
 }
 
-fetchGoldPrices();
+// Prevent unhandled rejections from failing Netlify build
+fetchGoldPrices().catch((err) => {
+console.error("Top-level error:", err);
+});
