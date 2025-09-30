@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node fetchGoldPrices.js && vite build", 
+    "build": "node src/scripts/fetch-gold-prices.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
