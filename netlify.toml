@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 [build]
   functions = "netlify/functions"
 
 [[functions]]
   name = "fetch-gold-prices"
   schedule = "@daily"    # runs once per day at midnight UTC
-=======
-[build]
-  functions = "netlify/functions"
-
-[[functions]]
-  name = "fetch-gold-prices"
-  schedule = "@daily"    # runs once per day at midnight UTC
->>>>>>> a5d43ec (netlify)
