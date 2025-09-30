@@ -12,8 +12,8 @@ async function fetchGoldPrices() {
   try {
     console.log("Fetching gold prices from Gemini...");
 
-    // Free / fast model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Updated to a valid model
+    const model = genAI.getGenerativeModel({ model: "models/gemini-2.5-flash" });
 
     const prompt = `What are the current 22 carat and 24 carat gold prices per gram in India today in INR?
 Please provide ONLY a JSON response in this exact format with no additional text:
