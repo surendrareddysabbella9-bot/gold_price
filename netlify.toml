@@ -1,0 +1,6 @@
+[build]
+  functions = "netlify/functions"
+
+[[functions]]
+  name = "fetch-gold-prices"
+  schedule = "@daily"    # runs once per day at midnight UTC
