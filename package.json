@@ -4,13 +4,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node src/fetchGoldPrices.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "lucide-react": "^0.263.1"
+    "lucide-react": "^0.263.1",
+    "dotenv": "^16.4.5",
+    "@google/generative-ai": "^0.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
